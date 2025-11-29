@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
     <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='sidebar.css') }}"> <!-- Would normally be "style.css", but hosting with flask requires this instead-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='body.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}" defer></script>
 </head>
 <body>
@@ -52,6 +55,10 @@
     </nav>
     <!-- <header>Distributed CAD Homepage</header> -->
     <main>
+        <h1>About Distributed CAD</h1>
+        <br>
+        <hr id="topLineBreak">
+        <br>
         <form id="cad-form">
             <label for="prompt">Enter your CAD prompt:</label>
             <input type="text" id="prompt" name="prompt" placeholder="e.g. Generate a biplane">
@@ -67,20 +74,9 @@
             <button type="submit">Submit</button>
         </form>
     </main>
-
-    <!-- <script>
-        // Optional: simple JS to handle form submission
-        document.getElementById('cad-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const prompt = document.getElementById('prompt').value;
-            const choice = document.getElementById('choice').value;
-            alert(`You entered: "${prompt}" with choice "${choice}"`);
-            // Here you could send the data to your /api endpoint with fetch()
-        });
-    </script> -->
 </body>
 </html>
 
 
 
-<!-- Followed alonig with video at: https://www.youtube.com/watch?v=R7b3OlEyqug -->
+<!-- Followed along with video at: https://www.youtube.com/watch?v=R7b3OlEyqug for sibedar -->

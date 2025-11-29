@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <title>Dist. CAD Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='sidebar.css') }}"> <!-- Would normally be "style.css", but hosting with flask requires this instead-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='body.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}" defer></script>
 </head>
 <body>
@@ -52,12 +55,15 @@
     </nav>
     <!-- <header>Distributed CAD Homepage</header> -->
     <main>
-        <h1>Distributed CAD</h1>
+        <h1>About Distributed CAD</h1>
+        <br>
+        <hr id="topLineBreak">
+        <br>
         <div>
-            <h2>About Distributed CAD</h2>
-            <p>Distributed cad leverages the strengths of distributed computing to enable customers from wherever they are! Distributed CAD takes 3 easy steps:
-            </p>
-            <ol>
+            <!-- <h2>About Distributed CAD</h2> -->
+            Distributed cad leverages the strengths of distributed computing to enable customers from wherever they are! Distributed CAD takes 3 easy steps:
+            <br>
+            <ol id="submission-steps">
                 <li>Type your text prompt inputl. Whatever you'd like a 3d model of goes here.</li>
                 <li>Select which model architecture you'd like to use for generation. We provide a variety of different model architectures to choose from, each with unique strengths.</li>
                 <li>Submit your request! After a short wait, you'll receive a response with your CAD model!</li>
@@ -69,4 +75,4 @@
 
 
 
-<!-- Followed alonig with video at: https://www.youtube.com/watch?v=R7b3OlEyqug -->
+<!-- Followed along with video at: https://www.youtube.com/watch?v=R7b3OlEyqug for sibedar -->

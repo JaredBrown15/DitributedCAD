@@ -30,7 +30,7 @@ function closeAllSubMenus(){
 }
 
 async function submitPrompt(event){
-    event.preventDefault();  // STOP the normal form submission
+    event.preventDefault();  // Stop the normal form submission
     const promptInput = document.getElementById('prompt').value;
     const model = document.getElementById('model').value;
     
@@ -40,11 +40,7 @@ async function submitPrompt(event){
         body: JSON.stringify({ prompt: promptInput, model: model })
     })
     showLoader();
-
-
-
-
-
+    setDisplayedMessage('Generating Model... This may take a few minutes');
 
     const data = await res.json();
     const jobId = data.job_id;
@@ -58,9 +54,8 @@ async function submitPrompt(event){
         status = sdata.status;
         if (status === "done") {
           try{
-            const result = sdata.result; // This is your dictionary from run_wala
+            const result = sdata.result; // Dictionary from run_wala
             console.log("JSON result ready:", result);
-            // You can trigger the download using your existing code
             const base64String = result.data;
             const binaryString = atob(base64String);
             const len = binaryString.length;
@@ -75,7 +70,7 @@ async function submitPrompt(event){
 
             const a = document.createElement("a");
             a.href = url;
-            a.download = data.filename || "model.obj"; // use filename from server if available
+            a.download = data.filename || "model.obj"; // use filename from server if available (it's not currently)
             document.body.appendChild(a);
             a.click();
 
@@ -89,6 +84,7 @@ async function submitPrompt(event){
        }
       }
       hideLoader();
+      setDisplayedMessage('Model Downloaded!');
 }
 
 
@@ -100,4 +96,9 @@ function showLoader() {
 
 function hideLoader() {
     document.getElementById("loader").style.display = "none";
+}
+
+function setDisplayedMessage(text){
+    const messageDiv = document.getElementById('messageDiv');
+    messageDiv.innerHTML = text;
 }

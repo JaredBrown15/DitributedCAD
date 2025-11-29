@@ -41,18 +41,6 @@ def run_wala_task(user_input, job_id):
     result = wala_run.main(user_input) 
     jobs[job_id] = {"status": "done", "result": result}
 
-    # if callback:
-    #     # Optional: you could POST to a callback URL or write to a file
-    #     callback(result)
-    # else:
-    #     # Save result to file or database for client to fetch later
-    #     filename = result.get('filename', 'model.obj')
-    #     with open(f"./outputs/{filename}", "w") as f:
-    #         f.write(result['data'])  # assuming base64 string
-
-
-
-# another resource to calculate the square of a number
 class WaLa(Resource):
 
     def post(self):

@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
     <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='sidebar.css') }}"> <!-- Would normally be "style.css", but hosting with flask requires this instead-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='body.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}" defer></script>
 </head>
 <body>
@@ -52,35 +55,13 @@
     </nav>
     <!-- <header>Distributed CAD Homepage</header> -->
     <main>
-        <form id="cad-form">
-            <label for="prompt">Enter your CAD prompt:</label>
-            <input type="text" id="prompt" name="prompt" placeholder="e.g. Generate a biplane">
-
-            <label for="choice">Select an option:</label>
-            <select id="choice" name="choice">
-                <option value="option1">Option 1: Mesh</option>
-                <option value="option2">Option 2: Wireframe</option>
-                <option value="option3">Option 3: Solid</option>
-            </select>
-            <p>This is a paragraph. It has some content. Incredible</p>
-
-            <button type="submit">Submit</button>
-        </form>
+        <h1>Distributed CAD - About the Creator</h1>
+        <br>
+        <hr id="topLineBreak">
+        <br>
+        My name is Jared Brown. I'm a student at Wright State University conducting research on generative AI for use in CAD modeling. Feel free to contact me at brown.1841@wright.edu
     </main>
-
-    <!-- <script>
-        // Optional: simple JS to handle form submission
-        document.getElementById('cad-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const prompt = document.getElementById('prompt').value;
-            const choice = document.getElementById('choice').value;
-            alert(`You entered: "${prompt}" with choice "${choice}"`);
-            // Here you could send the data to your /api endpoint with fetch()
-        });
-    </script> -->
 </body>
 </html>
 
-
-
-<!-- Followed alonig with video at: https://www.youtube.com/watch?v=R7b3OlEyqug -->
+<!-- Followed along with video at: https://www.youtube.com/watch?v=R7b3OlEyqug for sibedar -->

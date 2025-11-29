@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
     <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='sidebar.css') }}"> <!-- Would normally be "style.css", but hosting with flask requires this instead-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='body.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}" defer></script>
 </head>
 <body>
@@ -52,6 +55,10 @@
     </nav>
     <!-- <header>Distributed CAD Homepage</header> -->
     <main>
+        <h1>Distributed CAD - Make a Submission</h1>
+        <br>
+        <hr id="topLineBreak">
+        <br>
         <form id="cad-form" onsubmit="submitPrompt(event)">
             <label for="prompt">Enter your CAD prompt:</label>
             <input type="text" id="prompt" name="prompt" placeholder="e.g. Generate a biplane"></input>
@@ -59,18 +66,18 @@
             <select id="model" name="model">
                 <option value="WaLa">WaLa</option>
                 <option value="novel_model">Novel Architecture</option>
-                <option value="3rd_model">3rd Model</option>
+                <option value="3rd_model">PolyGen</option>
             </select>
-            <p>This is a paragraph. It has some content. Incredible</p>
-
+            <br><br>
             <button type="submit">Submit</button>
         </form>
-        <!-- <div id="model_viewer" style="width:100%; height:80vh;"></div> -->
-         <div id="loader" class="spinner"></div>
+        <br>
+        <div id="loader" class="spinner"></div>
+        <div id="messageDiv"></div>
     </main>
 </body>
 </html>
 
 
 
-<!-- Followed alonig with video at: https://www.youtube.com/watch?v=R7b3OlEyqug -->
+<!-- Followed along with video at: https://www.youtube.com/watch?v=R7b3OlEyqug for sibedar -->

@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
     <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='sidebar.css') }}"> <!-- Would normally be "style.css", but hosting with flask requires this instead-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='body.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}" defer></script>
 </head>
 <body>
@@ -52,35 +55,53 @@
     </nav>
     <!-- <header>Distributed CAD Homepage</header> -->
     <main>
-        <form id="cad-form">
-            <label for="prompt">Enter your CAD prompt:</label>
-            <input type="text" id="prompt" name="prompt" placeholder="e.g. Generate a biplane">
+        <h1>Distributed CAD - Model Information</h1>
+        <br>
+        <hr id="topLineBreak">
+        <br>
+        <title>Model Information</title>
+        <div>
+            <h2>WaLa</h2>
+            <br>
+            <p class="modelInfo">
+                Wala is stands for Wavelet Latent Diffusion. It was trained by compressing 3d model inputs from SDFs (signed distance functions) to wavelet trees via wavelet decomposition
+                The wavelet representations are passed through a vector-quantized variational autoencoder (VQ-VAE) to generate a latent encoding, further compressing the input.
+                This latent represntation is then passed through a DDPM (Diffusion Model) to generate a wavelet structure. This undergoes an inverse wavelet transform to generate the SDF,
+                which is then rendered using a technique like marching cubes or poisson surface reconstruction.
+            </p>
+            <!-- <img src="file:///C:/Users/jared/Documents/School/PhD/Images/WaLaWorkflow.png"> -->
+            <img id="walaImage" src="{{ url_for('static', filename='assets/WaLaWorkflow.png') }}">
+            <p class="modelInfo">This paper was created by researchers at Autodesk. More information can be found <a href="https://arxiv.org/pdf/2411.08017v1"><span>here.</span></a></p>
+            <br>
+            <br>
 
-            <label for="choice">Select an option:</label>
-            <select id="choice" name="choice">
-                <option value="option1">Option 1: Mesh</option>
-                <option value="option2">Option 2: Wireframe</option>
-                <option value="option3">Option 3: Solid</option>
-            </select>
-            <p>This is a paragraph. It has some content. Incredible</p>
+            <h2>Novel Architecture</h2>
+            <br>
+            <p class="modelInfo">
+                The novel architecture has not yet been implemented. The data preprocessing and architecture implementation are still under research and development.
+                It will be a combination of WaLa and PolyGen.
+            </p>
+            <p>If you would like more information, feel free to contact me!</p>
+            
+            <br>
+            <br>
 
-            <button type="submit">Submit</button>
-        </form>
+            <h2>PolyGen</h2>
+            <br>
+            <p class="modelInfo">
+                PolyGen is a transformer based architecture which generates very CAD-like models with smooth edges, flat faces, symmetry, etc... 
+                That being said, it requires specific prompts because the dataset(s) it was trained on do not encompass the vast assortment of data that WaLa had access to.
+            </p>
+            <img id="polygenImage" src="{{ url_for('static', filename='assets/PolyGenModel.png') }}">
+            <p class="modelInfo">This paper was created by researchers at Autodesk. More information can be found <a href="https://arxiv.org/pdf/2002.10880"><span>here.</span></a></p>
+            <br>
+            <br>
+            <br>
+        </div>
     </main>
-
-    <!-- <script>
-        // Optional: simple JS to handle form submission
-        document.getElementById('cad-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const prompt = document.getElementById('prompt').value;
-            const choice = document.getElementById('choice').value;
-            alert(`You entered: "${prompt}" with choice "${choice}"`);
-            // Here you could send the data to your /api endpoint with fetch()
-        });
-    </script> -->
 </body>
 </html>
 
 
 
-<!-- Followed alonig with video at: https://www.youtube.com/watch?v=R7b3OlEyqug -->
+<!-- Followed along with video at: https://www.youtube.com/watch?v=R7b3OlEyqug for sibedar -->
