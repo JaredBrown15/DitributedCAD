@@ -1,0 +1,24 @@
+services:
+  app:
+    image: distributed_cad:latest
+    container_name: cad_app
+    restart: always
+    ports:
+      - "8000:8000"
+    # GPU support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflare_tunnel
+    restart: always
+    command: tunnel run
+    volumes:
+      - ./cloudflared:/etc/cloudflared
+    network_mode: "host"

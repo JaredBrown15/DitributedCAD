@@ -4,8 +4,8 @@ import base64
 
 wala_home = ("models/WaLa/")
 gen_home = wala_home + "examples/text/"
-conda_home = '/home/jared/miniconda3/bin/conda'
-
+# conda_home = '/home/jared/miniconda3/bin/conda'
+conda_home = '/opt/conda/bin/conda'
 
 terminal_messages = [
     "Test",
@@ -22,7 +22,7 @@ commands = [
     ['mv', gen_home + 'depth_maps/image_4.png', gen_home + 'depth_maps/49.png'],
     ['mv', gen_home + 'depth_maps/image_5.png', gen_home + 'depth_maps/50.png'],
 
-    [conda_home, 'run', '-n', 'wala', 
+    [conda_home, 'run', '-n', 'dc_final_proj', 
     'python3', wala_home + 'run.py', 
         '--model_name', 'ADSKAILab/WaLa-DM6-1B', 
         '--dm6', 
@@ -54,7 +54,7 @@ def serialize_model(path_to_model):
 
 def generate_model(prompt):
     # global commands
-    gen_cmd = [conda_home, 'run', '-n', 'wala', 
+    gen_cmd = [conda_home, 'run', '-n', 'dc_final_proj', 
                 'python3', wala_home + 'run.py', 
                 '--model_name', 'ADSKAILab/WaLa-MVDream-DM6', 
                 '--text_to_dm6', f'\"{prompt}\"', 

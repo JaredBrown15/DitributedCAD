@@ -1,0 +1,51 @@
+# FROM nvidia/cuda:12.8.0-base-ubuntu22.04
+# FROM pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
+
+# Install system dependencies and then clean unneeded ones
+RUN apt-get update && apt-get install -y wget bzip2 ca-certificates git && rm -rf /var/lib/apt/lists/*
+
+# # Install Miniconda for my conda env (opt is because optional download) then remove unneeded script
+# Included in base image already
+# RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && \
+#     bash miniconda.sh -b -p /opt/conda && rm miniconda.sh
+# ENV PATH="/opt/conda/bin:$PATH"
+
+# # Accept Anaconda Terms of Service for the channels
+# RUN conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main && \
+#     conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+
+RUN conda update -n base -c defaults conda
+# Set working directory
+WORKDIR /environment
+
+# Copy environment files
+# COPY environment/conda_clean.yml .
+COPY environment/environment.yml .
+COPY environment/requirements.txt .
+
+# Create env and install conda dependencies
+# RUN conda env create -f conda_clean.yml && rm conda_clean.yml
+RUN conda env create -f environment.yml && rm environment.yml
+
+# Set default environmentm to new env with installed dependencies
+ENV PATH=/opt/conda/envs/dc_final_proj/bin:$PATH
+
+# # Activate environment & install pip dependencies
+# RUN /opt/conda/envs/project/bin/pip install --no-cache-dir -r requirements.txt
+
+# explicitly install torch on its own
+# RUN /opt/conda/bin/conda run -n project pip install --no-cache-dir -r requirements.txt
+RUN /opt/conda/bin/conda run -n dc_final_proj pip install -r requirements.txt
+
+RUN conda install -n dc_final_proj  -c conda-forge pycuda
+# RUN /opt/conda/bin/conda run -n project pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cu128
+
+WORKDIR /app
+# Copy project files
+COPY . .
+
+# Expose Flask port
+# EXPOSE 8000
+
+# Run the Flask app
+CMD ["python", "flask_api_test.py"]

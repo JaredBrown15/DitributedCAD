@@ -1,12 +1,9 @@
-# FROM nvidia/cuda:12.8.61-cudnn8-runtime-ubuntu22.04
-FROM nvidia/cuda:12.8.0-base-ubuntu22.04
-# FROM pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
+FROM ubuntu:24.04
 
 # Install system dependencies and then clean unneeded ones
 RUN apt-get update && apt-get install -y wget bzip2 ca-certificates git && rm -rf /var/lib/apt/lists/*
 
-# # Install Miniconda for my conda env (opt is because optional download) then remove unneeded script
-# Included in base image already
+# Install Miniconda for my conda env (opt is because optional download) then remove unneeded script
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && \
     bash miniconda.sh -b -p /opt/conda && rm miniconda.sh
 ENV PATH="/opt/conda/bin:$PATH"
@@ -20,21 +17,25 @@ RUN conda update -n base -c defaults conda
 WORKDIR /environment
 
 # Copy environment files
-COPY environment/conda_clean.yml .
+# COPY environment/conda_clean.yml .
+COPY environment/environment.yml .
 COPY environment/requirements.txt .
 
 # Create env and install conda dependencies
-RUN conda env create -f conda_clean.yml && rm conda_clean.yml
+# RUN conda env create -f conda_clean.yml && rm conda_clean.yml
+RUN conda env create -f environment.yml && rm environment.yml
 
 # Set default environmentm to new env with installed dependencies
-ENV PATH=/opt/conda/envs/project/bin:$PATH
+ENV PATH=/opt/conda/envs/dc_final_proj/bin:$PATH
 
 # # Activate environment & install pip dependencies
 # RUN /opt/conda/envs/project/bin/pip install --no-cache-dir -r requirements.txt
 
 # explicitly install torch on its own
-RUN /opt/conda/bin/conda run -n project pip install --no-cache-dir -r requirements.txt
-RUN /opt/conda/bin/conda run -n project pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cu128
+# RUN /opt/conda/bin/conda run -n project pip install --no-cache-dir -r requirements.txt
+RUN /opt/conda/bin/conda run -n dc_final_proj pip install -r requirements.txt
+RUN /opt/conda/bin/conda run -n dc_final_proj pip install torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1 --index-url https://download.pytorch.org/whl/cu128
+RUN conda install -n dc_final_proj  -c conda-forge pycuda
 
 WORKDIR /app
 # Copy project files
